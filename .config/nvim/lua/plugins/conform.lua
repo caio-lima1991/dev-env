@@ -26,7 +26,7 @@ return {
         async = false,
         timeout_ms = 3000,
       },
-      formatters = {},
+      formatters = { ["google-java-format"] = { prepend_args = { "--aosp" } } },
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>cf", function()
