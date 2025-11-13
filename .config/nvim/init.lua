@@ -1,25 +1,41 @@
 vim.g.mapleader = " "
+vim.opt.clipboard:append("unnamedplus")
 
-require("config.lazy")
-require("core")
+if vim.g.vscode then
+  vim.g.clipboard = "win32yank"
+  vim.keymap.set(
+    "n",
+    "gri",
+    "<Cmd>call VSCodeNotify('editor.action.goToImplementation')<CR>",
+    { desc = "Go to Implementation" }
+  )
+  vim.keymap.set(
+    "n",
+    "grd",
+    "<Cmd>call VSCodeNotify('editor.action.goToDefinition')<CR>",
+    { desc = "Go to Definition" }
+  )
+else
+  require("config.lazy")
+  require("core")
 
-local get_jdtls_config = require("config.lsp.jdtls")
+  local get_jdtls_config = require("config.lsp.jdtls")
 
--- JDTLS
-local function jdtls_autostart()
-  for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-    if client.name == "jdtls" then
-      return
+  -- JDTLS
+  local function jdtls_autostart()
+    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+      if client.name == "jdtls" then
+        return
+      end
     end
+    require("jdtls").start_or_attach(get_jdtls_config())
   end
-  require("jdtls").start_or_attach(get_jdtls_config())
+
+  vim.api.nvim_create_augroup("JDTLS_LSP_START", { clear = true })
+  vim.api.nvim_create_autocmd("FileType", {
+    group = "JDTLS_LSP_START",
+    pattern = "java",
+    callback = jdtls_autostart,
+    desc = "Start nvim-jdtls for Java files",
+  })
 end
-
-vim.api.nvim_create_augroup("JDTLS_LSP_START", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  group = "JDTLS_LSP_START",
-  pattern = "java",
-  callback = jdtls_autostart,
-  desc = "Start nvim-jdtls for Java files",
-})
-
