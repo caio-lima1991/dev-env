@@ -2,6 +2,7 @@ return {
   {
     "mfussenegger/nvim-dap",
     desc = "Debugging support. Requires language specific adapters to be configured.",
+    dependencies = { "rcarriga/nvim-dap-ui", "nvim-neotest/nvim-nio" },
     keys = {
       {
         "<leader>dB",
@@ -142,6 +143,18 @@ return {
       vscode.json_decode = function(str)
         return vim.json.decode(json.json_strip_comments(str))
       end
+
+      -- Setup dap-ui listeners
+      local dap, dapui = require("dap"), require("dapui")
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
     end,
   },
 
@@ -166,23 +179,6 @@ return {
       },
     },
     opts = {},
-    config = function(_, opts)
-      local dap = require("dap")
-      local dapui = require("dapui")
-      dapui.setup(opts)
-      dap.listeners.before.attach.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        dapui.close()
-      end
-    end,
   },
   {
     "theHamsta/nvim-dap-virtual-text",

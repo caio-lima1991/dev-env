@@ -24,6 +24,7 @@ return {
         "pyright",
         "eslint",
         "jdtls",
+        "angularls",
       },
       automatic_enable = {
         exclude = {

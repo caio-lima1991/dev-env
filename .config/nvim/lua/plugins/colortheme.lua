@@ -1,8 +1,8 @@
 return {
-  "vague-theme/vague.nvim",
+  "ellisonleao/gruvbox.nvim",
   lazy = false,
   priority = 1000,
   config = function()
-    vim.cmd("colorscheme vague")
+    vim.cmd("colorscheme gruvbox")
   end,
 }
