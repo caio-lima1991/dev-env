@@ -15,11 +15,14 @@ return {
           port = 5005,
         },
       }
+
+      require("mason-nvim-dap").setup({
+        ensure_installed = { "javadbg" },
+      })
     end,
     dependencies = {
       {
         "mason-org/mason.nvim",
-        opts = { ensure_installed = { "java-debug-adapter", "java-test" } },
       },
     },
   },
