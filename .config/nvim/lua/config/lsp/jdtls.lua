@@ -65,6 +65,8 @@ local function get_jdtls_config()
     bundles = bundles,
   }
 
+  jdtls.setup_dap({ hotcodereplace = "auto", config_overrides = {} })
+
   return config
 end
 

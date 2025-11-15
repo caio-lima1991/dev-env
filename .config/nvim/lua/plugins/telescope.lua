@@ -27,6 +27,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     local builtin = require("telescope.builtin")
     vim.keymap.set("n", "grr", builtin.lsp_references, { desc = "LSP References" })
+    vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "LSP Definitions" })
 
     vim.keymap.set("n", "<leader>m", builtin.marks, { desc = "Marks" })
 
