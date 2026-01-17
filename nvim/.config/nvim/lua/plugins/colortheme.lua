@@ -1,8 +1,8 @@
 return {
-  "ellisonleao/gruvbox.nvim",
+  "Mofiqul/adwaita.nvim",
   lazy = false,
   priority = 1000,
   config = function()
-    vim.cmd("colorscheme gruvbox")
+    vim.cmd("colorscheme adwaita")
   end,
 }

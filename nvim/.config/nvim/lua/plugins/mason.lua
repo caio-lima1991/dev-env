@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     event = "VeryLazy",
     opts = {
       -- list of servers for mason to install
@@ -37,22 +37,6 @@ return {
         },
       },
       "neovim/nvim-lspconfig",
-    },
-  },
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    event = "VeryLazy",
-    opts = {
-      ensure_installed = {
-        { "prettier", version = "3.7.4" },
-        { "stylua", version = "v2.3.1" },
-        { "isort", version = "7.0.0" },
-        { "google-java-format", version = "v1.33.0" },
-        { "xmlformatter", version = "0.2.8" },
-      },
-    },
-    dependencies = {
-      "williamboman/mason.nvim",
     },
   },
 }
