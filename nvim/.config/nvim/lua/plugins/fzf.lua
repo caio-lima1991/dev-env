@@ -3,6 +3,7 @@ return {
   -- 1. Plugin Specification for fzf-lua
   {
     "ibhagwan/fzf-lua",
+    lazy = false,
     cmd = "FzfLua",
 
     opts = {
@@ -17,9 +18,9 @@ return {
 
     config = function(_, opts)
       local fzf = require("fzf-lua")
-
-      -- Apply the default options from the opts table above
       fzf.setup(opts)
+
+      fzf.register_ui_select()
       local config = fzf.config
 
       -- FZF Terminal Mappings
@@ -90,7 +91,9 @@ return {
       { "<leader>sW", "<cmd>FzfLua grep_visual root=false<cr>", mode = "x", desc = "Selection (cwd)" },
       {
         "<leader>sX",
-        "<cmd>FzfLua diagnostics_workspace severity=ERROR<cr>",
+        function()
+          require("fzf-lua").diagnostics_workspace({ severity = "ERROR" })
+        end,
         desc = "Search Diagnostic Errors",
       },
 
