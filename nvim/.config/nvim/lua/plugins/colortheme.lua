@@ -1,8 +1,8 @@
 return {
-  "miikanissi/modus-themes.nvim",
+  "projekt0n/github-nvim-theme",
   lazy = false,
   priority = 1000,
   config = function()
-    vim.cmd("colorscheme modus")
+    vim.cmd("colorscheme github_dark_default")
   end,
 }
