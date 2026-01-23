@@ -92,7 +92,9 @@ return {
       {
         "<leader>sX",
         function()
-          require("fzf-lua").diagnostics_workspace({ severity = "ERROR" })
+          require("fzf-lua").diagnostics_workspace({
+            severity_only = vim.diagnostic.severity.ERROR,
+          })
         end,
         desc = "Search Diagnostic Errors",
       },
