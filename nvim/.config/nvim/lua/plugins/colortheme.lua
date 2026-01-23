@@ -1,8 +1,8 @@
 return {
-  "Mofiqul/adwaita.nvim",
+  "miikanissi/modus-themes.nvim",
   lazy = false,
   priority = 1000,
   config = function()
-    vim.cmd("colorscheme adwaita")
+    vim.cmd("colorscheme modus")
   end,
 }

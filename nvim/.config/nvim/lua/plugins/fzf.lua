@@ -88,6 +88,11 @@ return {
       { "<leader>sW", "<cmd>FzfLua grep_cword root=false<cr>", desc = "Word (cwd)" },
       { "<leader>sw", "<cmd>FzfLua grep_visual<cr>", mode = "x", desc = "Selection (Root Dir)" },
       { "<leader>sW", "<cmd>FzfLua grep_visual root=false<cr>", mode = "x", desc = "Selection (cwd)" },
+      {
+        "<leader>sX",
+        "<cmd>FzfLua diagnostics_workspace severity=ERROR<cr>",
+        desc = "Search Diagnostic Errors",
+      },
 
       -- Symbols
       {
