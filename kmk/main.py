@@ -1,14 +1,30 @@
 import board
 
 from kmk.kmk_keyboard import KMKKeyboard
-from kmk.keys import KC
+from kmk.keys import KC, Key
 from kmk.scanners import DiodeOrientation
 from kmk.modules.layers import Layers
-from kmk.extensions.international import International
+from kmk.modules.mouse_keys import MouseKeys
+from kmk.extensions.media_keys import MediaKeys
 
 keyboard = KMKKeyboard()
 keyboard.modules.append(Layers())
-keyboard.extensions.append(International())
+keyboard.extensions.append(MediaKeys())
+
+mouse_keys = MouseKeys(
+    max_speed = 20,
+    acc_interval = 20,
+    move_step = 1)
+
+keyboard.modules.append(mouse_keys)
+
+def toggle_mouse_speed(key, keyboard, *args):
+    if mouse_keys.max_speed == 20:
+        mouse_keys.max_speed = 5
+    else:
+        mouse_keys.max_speed = 20
+
+KC_MS_SPD = Key(on_press=toggle_mouse_speed)
 
 keyboard.row_pins = (board.GP0, board.GP1, board.GP2, board.GP3, board.GP4)
 keyboard.col_pins = (board.GP5, board.GP6, board.GP7, board.GP8, board.GP9, 
@@ -32,11 +48,11 @@ keyboard.keymap = [
                                 KC.LGUI,    KC.ENTER,   KC.MO(1),   KC.HOME,    KC.END,     KC.MO(1),   KC.SPACE,   KC.RALT
     ],
     [
-        KC.F12,     KC.F1,      KC.F2,      KC.F3,      KC.F4,      KC.F5,      KC.F6,      KC.F7,      KC.F8,      KC.F9,      KC.F10,         KC.F11,
-        KC.GRV,     KC.MPRV,    KC.MNXT,    KC.MPLY,    KC.NO,      KC.NO,      KC.MINS,    KC.EQL,     KC.RBRC,    KC.BSLS,    KC.NONUS_BSLASH,KC.LBRC,
-        KC.LCTRL,   KC.MUTE,    KC.VOLD,    KC.VOLU,    KC.PGDOWN,  KC.PGUP,    KC.LEFT,    KC.DOWN,    KC.UP,      KC.RIGHT,   KC.NO,          KC.NO,
-        KC.LSFT,    KC.CAPS,    KC.NO,      KC.NO,      KC.NO,      KC.NO,      KC.NO,      KC.NO,      KC.NO,      KC.NO,      KC.NO,          KC.RSFT,
-                                KC.NO,      KC.LCTL,    KC.NO,      KC.NO,      KC.NO,      KC.TRNS,    KC.NO,      KC.NO
+        KC.F12,     KC.F1,      KC.F2,      KC.F3,      KC.F4,      KC.F5,      KC.F6,      KC.F7,      KC.F8,      KC.F9,      KC.F10,     KC.F11,
+        KC.TAB,     KC.NO,      KC.MB_LMB,  KC.MS_UP,   KC.MB_RMB,  KC.PGDOWN,  KC.GRAVE,   KC.MINS,    KC.EQL,     KC.LBRC,    KC.RBRC,    KC.BSLS,
+        KC.LCTRL,   KC.NO,      KC.MS_LT,   KC.MS_DOWN, KC.MS_RT,   KC.PGUP,    KC.LEFT,    KC.DOWN,    KC.UP,      KC.RIGHT,   KC.NO,      KC.NO,
+        KC.LSFT,    KC.CAPS,    KC.NO,      KC.NO,      KC.NO,      KC.NO,      KC.VOLD,    KC.VOLU,    KC.MUTE,    KC.NO,      KC.NO,      KC.RSFT,
+                                KC.NO,      KC.LCTL,    KC_MS_SPD,  KC.NO,      KC.NO,      KC.TRNS,    KC.NO,      KC.NO
     ]]
 
 if __name__ == '__main__':
