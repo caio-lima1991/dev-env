@@ -3,7 +3,6 @@ return {
     "mason-org/mason-lspconfig.nvim",
     event = "VeryLazy",
     opts = {
-      -- list of servers for mason to install
       ensure_installed = {
         "ts_ls@5.1.3",
         "html@4.10.0",
@@ -23,7 +22,7 @@ return {
     },
     dependencies = {
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         event = "VeryLazy",
         cmd = "Mason",
         opts = {
