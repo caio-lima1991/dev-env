@@ -10,10 +10,18 @@ normal.family = "CodeNewRoman Nerd Font"
 bold.family = "CodeNewRoman Nerd Font Bold"
 italic.family = "CodeNewRoman Nerd Font Italic"
 bold_italic.family = "CodeNewRoman Nerd Font Italic"
-size = 12
+size = 11
 
 [terminal]
 osc52 = "CopyPaste"
 
 [mouse]
 hide_when_typing = true
+
+[terminal.shell]
+program = "wsl.exe"
+args = [
+    "~",
+    "-d",
+    "openSUSE-Tumbleweed"
+]
