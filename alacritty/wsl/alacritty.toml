@@ -1,5 +1,7 @@
 [env]
 TERM = "xterm-256color"
+COLORTERM = "truecolor"
+WSLENV = "COLORTERM/u"
 
 [window]
 decorations = "None"
