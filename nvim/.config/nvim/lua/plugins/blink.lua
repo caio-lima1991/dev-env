@@ -1,4 +1,4 @@
-return { -- Autocompletion
+return {
   "saghen/blink.cmp",
   event = "InsertEnter",
   version = "1.*",
@@ -20,10 +20,6 @@ return { -- Autocompletion
   opts = {
     keymap = {
       preset = "default",
-    },
-
-    appearance = {
-      nerd_font_variant = "mono",
     },
 
     completion = {

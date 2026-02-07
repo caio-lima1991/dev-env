@@ -2,7 +2,7 @@ return {
   "stevearc/oil.nvim",
   cmd = "Oil",
   keys = {
-    { "-", "<cmd>Oil --float<cr>", desc = "Open parent directory" },
+    { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
   },
   opts = {
     float = {
