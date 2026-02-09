@@ -10,7 +10,7 @@ return {
         "lua_ls@3.15.0",
         "pyright@1.1.407",
         "eslint@4.10.0",
-        "jdtls@v1.54.0",
+        "jdtls@v1.56.0",
         "angularls@21.0.6",
         "bashls@5.6.0",
       },

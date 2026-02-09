@@ -7,10 +7,6 @@ decorations = "None"
 startup_mode = "Maximized"
 
 [font]
-normal.family = "CodeNewRoman Nerd Font"
-bold.family = "CodeNewRoman Nerd Font Bold"
-italic.family = "CodeNewRoman Nerd Font Italic"
-bold_italic.family = "CodeNewRoman Nerd Font Italic"
 size = 12
 
 [terminal]
