@@ -7,7 +7,8 @@ decorations = "None"
 startup_mode = "Maximized"
 
 [font]
-size = 12
+normal.family = "CodeNewRoman Nerd Font"
+size = 11
 
 [terminal]
 osc52 = "CopyPaste"
