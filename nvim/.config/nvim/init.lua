@@ -2,7 +2,6 @@ vim.g.mapleader = " "
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.termguicolors = true
 
--- VSCode config
 if vim.g.vscode then
   vim.g.clipboard = "win32yank"
   vim.keymap.set(
@@ -18,6 +17,22 @@ if vim.g.vscode then
     { desc = "Go to Definition" }
   )
 else
+  -- Fast WSL Clipboard Configuration
+  if vim.fn.has("wsl") == 1 then
+    vim.g.clipboard = {
+      name = "win32yank-wsl",
+      copy = {
+        ["+"] = "win32yank.exe -i --crlf",
+        ["*"] = "win32yank.exe -i --crlf",
+      },
+      paste = {
+        ["+"] = "win32yank.exe -o --lf",
+        ["*"] = "win32yank.exe -o --lf",
+      },
+      cache_enabled = 0,
+    }
+  end
+
   -- Neovim only
   require("config.lazy")
   require("core")
