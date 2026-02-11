@@ -2,12 +2,14 @@ return {
   {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
+    event = "InsertEnter",
     build = "make install_jsregexp",
     dependencies = { "rafamadriz/friendly-snippets" },
     config = function() end,
   },
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
