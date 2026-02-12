@@ -21,6 +21,7 @@ return {
         python = { "isort", "black" },
         java = { "google-java-format" },
         xml = { "xmlformatter" },
+        markdown = { "markdownlint-cli2" },
       },
       format_on_save = {
         lsp_fallback = true,

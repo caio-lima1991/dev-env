@@ -13,6 +13,7 @@ return {
         "jdtls@v1.56.0",
         "angularls@21.0.6",
         "bashls@5.6.0",
+        "marksman"
       },
       automatic_enable = {
         exclude = {
