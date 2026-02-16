@@ -35,5 +35,5 @@ else
 
   -- Neovim only
   require("config.lazy")
-  require("core")
+  require("init")
 end
