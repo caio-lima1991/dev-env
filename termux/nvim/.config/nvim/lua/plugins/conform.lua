@@ -5,6 +5,7 @@ return {
     local conform = require("conform")
     conform.setup({
       formatters_by_ft = {
+        lua = { "stylua" },
         markdown = { "markdownlint-cli2" },
       },
       format_on_save = {
@@ -12,7 +13,6 @@ return {
         async = false,
         timeout_ms = 3000,
       },
-      formatters = { ["google-java-format"] = { prepend_args = { "--aosp" } } },
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>cf", function()
