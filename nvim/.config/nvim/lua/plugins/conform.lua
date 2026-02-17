@@ -5,22 +5,7 @@ return {
     local conform = require("conform")
     conform.setup({
       formatters_by_ft = {
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
-        svelte = { "prettier" },
-        css = { "prettier" },
-        html = { "prettier" },
-        htmlangular = { "prettier" },
-        json = { "prettier" },
-        yaml = { "prettier" },
-        graphql = { "prettier" },
-        liquid = { "prettier" },
         lua = { "stylua" },
-        python = { "isort", "black" },
-        java = { "google-java-format" },
-        xml = { "xmlformatter" },
         markdown = { "markdownlint-cli2" },
       },
       format_on_save = {
@@ -28,7 +13,7 @@ return {
         async = false,
         timeout_ms = 3000,
       },
-      formatters = { ["google-java-format"] = { prepend_args = { "--aosp" } } },
+      formatters = {},
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>cf", function()
