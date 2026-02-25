@@ -6,7 +6,7 @@ return {
       local get_jdtls_config = require("config.lsp.jdtls")
 
       local function jdtls_autostart()
-        for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+        for _, client in pairs(vim.lsp.get_lients({ bufnr = 0 })) do
           if client.name == "jdtls" then
             return
           end
