@@ -32,4 +32,3 @@ opt.splitright = true -- split vertical window to the right
 opt.splitbelow = true -- split horizontal window to the bottom
 
 vim.o.winborder = "rounded"
-vim.cmd([[colorscheme retrobox]])
