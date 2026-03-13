@@ -1,5 +1,6 @@
 local function get_args(config)
-  local args = type(config.args) == "function" and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
+  local args = type(config.args) == "function" and (config.args() or {}) or config.args or
+      {} --[[@as string[] | string ]]
   local args_str = type(args) == "table" and table.concat(args, " ") or args --[[@as string]]
 
   config = vim.deepcopy(config)
@@ -31,119 +32,119 @@ return {
 
     keys = {
       {
-        "<leader>dB",
+        "<leader>ddB",
         function()
           require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
         end,
         desc = "Breakpoint Condition",
       },
       {
-        "<leader>db",
+        "<leader>ddb",
         function()
           require("dap").toggle_breakpoint()
         end,
         desc = "Toggle Breakpoint",
       },
       {
-        "<leader>dc",
+        "<leader>ddc",
         function()
           require("dap").continue()
         end,
         desc = "Run/Continue",
       },
       {
-        "<leader>da",
+        "<leader>dda",
         function()
           require("dap").continue({ before = get_args })
         end,
         desc = "Run with Args",
       },
       {
-        "<leader>dC",
+        "<leader>ddC",
         function()
           require("dap").run_to_cursor()
         end,
         desc = "Run to Cursor",
       },
       {
-        "<leader>dg",
+        "<leader>ddg",
         function()
           require("dap").goto_()
         end,
         desc = "Go to Line (No Execute)",
       },
       {
-        "<leader>di",
+        "<leader>ddi",
         function()
           require("dap").step_into()
         end,
         desc = "Step Into",
       },
       {
-        "<leader>dj",
+        "<leader>ddj",
         function()
           require("dap").down()
         end,
         desc = "Down",
       },
       {
-        "<leader>dk",
+        "<leader>ddk",
         function()
           require("dap").up()
         end,
         desc = "Up",
       },
       {
-        "<leader>dl",
+        "<leader>ddl",
         function()
           require("dap").run_last()
         end,
         desc = "Run Last",
       },
       {
-        "<leader>do",
+        "<leader>ddo",
         function()
           require("dap").step_out()
         end,
         desc = "Step Out",
       },
       {
-        "<leader>dO",
+        "<leader>ddO",
         function()
           require("dap").step_over()
         end,
         desc = "Step Over",
       },
       {
-        "<leader>dP",
+        "<leader>ddP",
         function()
           require("dap").pause()
         end,
         desc = "Pause",
       },
       {
-        "<leader>dr",
+        "<leader>ddr",
         function()
           require("dap").repl.toggle()
         end,
         desc = "Toggle REPL",
       },
       {
-        "<leader>ds",
+        "<leader>dds",
         function()
           require("dap").session()
         end,
         desc = "Session",
       },
       {
-        "<leader>dt",
+        "<leader>ddt",
         function()
           require("dap").terminate()
         end,
         desc = "Terminate",
       },
       {
-        "<leader>dw",
+        "<leader>ddw",
         function()
           require("dap.ui.widgets").hover()
         end,
@@ -187,7 +188,7 @@ return {
         desc = "DAP: Toggle Breakpoint",
       },
       {
-        "<leader>dx", -- Example custom keymap for Terminate
+        "<leader>ddx", -- Example custom keymap for Terminate
         function()
           require("dap").terminate()
         end,
@@ -225,14 +226,14 @@ return {
     event = "VeryLazy",
     keys = {
       {
-        "<leader>du",
+        "<leader>ddu",
         function()
           require("dapui").toggle({})
         end,
         desc = "Dap UI",
       },
       {
-        "<leader>de",
+        "<leader>dde",
         function()
           require("dapui").eval()
         end,

@@ -14,6 +14,8 @@ return {
         end,
       },
       "folke/lazydev.nvim",
+      "saghen/blink.compat",
+      "kristijanhusak/vim-dadbod-completion",
     },
     opts = {
       keymap = { preset = "default" },
@@ -22,9 +24,14 @@ return {
       },
 
       sources = {
-        default = { "lsp", "path", "snippets", "lazydev", "buffer" },
+        default = { "lsp", "path", "snippets", "lazydev", "buffer", "dadbod" },
         providers = {
           lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+          dadbod = {
+            name = "Dadbod",
+            module = "vim_dadbod_completion.blink",
+            score_offset = 100, -- Faz as sugestões do banco aparecerem no topo
+          },
         },
       },
 
