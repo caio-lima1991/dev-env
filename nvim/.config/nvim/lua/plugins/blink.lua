@@ -14,7 +14,6 @@ return {
         end,
       },
       "folke/lazydev.nvim",
-      "saghen/blink.compat",
       "kristijanhusak/vim-dadbod-completion",
     },
     opts = {
