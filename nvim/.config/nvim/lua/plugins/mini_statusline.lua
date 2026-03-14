@@ -2,7 +2,7 @@ return {
   "nvim-mini/mini.statusline",
 
   dependencies = {
-    { "nvim-tree/nvim-web-devicons", opts = {} },
+    { "nvim-mini/mini.icons", opts = {} },
   },
 
   version = false,

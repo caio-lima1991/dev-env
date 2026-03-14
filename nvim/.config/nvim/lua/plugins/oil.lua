@@ -1,16 +1,10 @@
 return {
   "stevearc/oil.nvim",
-
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  lazy = false,
+  cmd = "Oil",
   keys = {
-    { "-", "<cmd>Oil --float<cr>", desc = "Open parent directory in float" },
+    { "-", "<cmd>Oil --float<cr>", desc = "Open parent directory" },
   },
-
   opts = {
-    default_file_explorer = true,
-    delete_to_trash = true,
-    skip_confirm_for_simple_edits = true,
     view_options = {
       show_hidden = true,
     },
@@ -20,9 +14,11 @@ return {
       max_height = 0.8,
       border = "rounded",
       win_options = {
-        winhighlight = "Normal:Normal,FloatBorder:Operator,CursorLine:Visual",
         winblend = 0,
       },
+      preview_split = "auto",
     },
   },
+  dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+  lazy = false,
 }

@@ -22,6 +22,7 @@ return {
         java = { "google-java-format" },
         xml = { "xmlformatter" },
         markdown = { "markdownlint-cli2" },
+        sql = { "sqlfluff" }
       },
       format_on_save = {
         lsp_fallback = true,
