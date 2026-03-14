@@ -54,7 +54,7 @@ return {
       { "<leader>,",       "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Switch Buffer" },
       { "<leader>/",       "<cmd>FzfLua live_grep formatter=path.filename_first<cr>",  desc = "Grep (Root Dir)" },
       { "<leader>:",       "<cmd>FzfLua command_history<cr>",                          desc = "Command History" },
-      { "<leader><space>", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { "<leader><space>", "<cmd>FzfLua files<cr>",                                    desc = "Find Files (Root Dir)" },
 
       -- find
       { "<leader>fb",      "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
