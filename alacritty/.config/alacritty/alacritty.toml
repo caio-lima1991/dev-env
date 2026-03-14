@@ -4,7 +4,7 @@ COLORTERM = "truecolor"
 
 [window]
 decorations = "None"
-startup_mode = "Maximized"
+startup_mode = "Fullscreen"
 
 [font]
 normal.family = "CodeNewRoman Nerd Font"

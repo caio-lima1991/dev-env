@@ -5,7 +5,7 @@ WSLENV = "COLORTERM/u"
 
 [window]
 decorations = "None"
-startup_mode = "Maximized"
+startup_mode = "Fullscreen"
 
 [font]
 size = 11
