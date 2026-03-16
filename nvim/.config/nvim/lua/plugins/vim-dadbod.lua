@@ -8,7 +8,7 @@ return {
     "kristijanhusak/vim-dadbod-ui",
     cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
     dependencies = {
-      { "tpope/vim-dadbod",                     lazy = true },
+      { "tpope/vim-dadbod", lazy = true },
       { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
     },
 
@@ -17,22 +17,14 @@ return {
     },
 
     init = function()
-      local data_path = "~/.local/share/"
+      local data_path = "~/.local/share/db_ui/"
 
-      vim.g.db_ui_save_location = data_path .. "/db_ui"
-      vim.g.db_ui_tmp_query_location = data_path .. "/db_ui/tmp"
+      vim.g.db_ui_save_location = data_path
+      vim.g.db_ui_tmp_query_location = data_path .. "/tmp"
+
       vim.g.db_ui_show_database_icon = true
       vim.g.db_ui_use_nerd_fonts = true
-
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "sql", "mysql", "plsql" },
-        callback = function()
-          require("lazy").load({ plugins = { "vim-dadbod" } })
-        end,
-      })
-    end,
-    config = function()
-      require("lazy").load({ plugins = { "vim-dadbod" } })
+      vim.g.dbext_default_ORA_bin = "sql"
     end,
   },
 }
