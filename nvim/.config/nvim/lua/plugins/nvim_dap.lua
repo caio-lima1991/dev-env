@@ -1,6 +1,6 @@
 local function get_args(config)
   local args = type(config.args) == "function" and (config.args() or {}) or config.args or
-  {} --[[@as string[] | string ]]
+      {} --[[@as string[] | string ]]
   local args_str = type(args) == "table" and table.concat(args, " ") or args --[[@as string]]
 
   config = vim.deepcopy(config)
@@ -24,6 +24,7 @@ return {
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
       {
         "theHamsta/nvim-dap-virtual-text",
         opts = {},
