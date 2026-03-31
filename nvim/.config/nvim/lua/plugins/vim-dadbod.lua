@@ -24,7 +24,6 @@ return {
 
       vim.g.db_ui_show_database_icon = true
       vim.g.db_ui_use_nerd_fonts = true
-      vim.g.dbext_default_ORA_bin = "sql"
     end,
   },
 }
