@@ -1,27 +1,27 @@
-vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
+vim.pack.add({ "https://github.com/romus204/tree-sitter-manager.nvim" })
 
-require("nvim-treesitter").install({
-    "bash",
-    "http",
-    "c",
-    "diff",
-    "html",
-    "lua",
-    "luadoc",
-    "query",
-    "vim",
-    "vimdoc",
-    "java",
-    "sql",
-    "javadoc",
-    "javascript",
-    "typescript",
-    "http",
-    "graphql",
+require("tree-sitter-manager").setup({
+	parser_install_dir = vim.fn.stdpath("data") .. "/site",
+	auto_install = true,
+	ensure_installed = {
+		"bash",
+		"http",
+		"diff",
+		"html",
+		"query",
+		"java",
+		"sql",
+		"javadoc",
+		"javascript",
+		"typescript",
+		"http",
+		"graphql",
+	},
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    callback = function()
-        pcall(vim.treesitter.start)
-    end,
+	callback = function()
+		local lang = vim.treesitter.language.get_lang(vim.bo.filetype) or vim.bo.filetype
+		pcall(vim.treesitter.start)
+	end,
 })
