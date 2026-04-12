@@ -8,4 +8,5 @@ vim.lsp.enable({
 	"markdown_oxide",
 	"pyright",
 	"ts_ls",
+	"angularls",
 })
