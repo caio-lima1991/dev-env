@@ -1,13 +1,6 @@
-return {
-  "nvim-mini/mini.statusline",
+vim.pack.add({
+    "https://github.com/nvim-mini/mini.statusline",
+    "https://github.com/nvim-mini/mini.icons" })
 
-  dependencies = {
-    { "nvim-mini/mini.icons", opts = {} },
-  },
 
-  version = false,
-
-  config = function()
-    require("mini.statusline").setup()
-  end,
-}
+require("mini.statusline").setup()

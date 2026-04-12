@@ -1,42 +1,14 @@
-return {
-  {
-    "mason-org/mason-lspconfig.nvim",
-    event = "VeryLazy",
-    opts = {
-      ensure_installed = {
-        "ts_ls",
-        "html",
-        "cssls",
-        "lua_ls",
-        "pyright",
-        "eslint",
-        "jdtls",
-        "angularls",
-        "bashls",
-        "markdown_oxide",
-      },
-      automatic_enable = {
-        exclude = {
-          "jdtls",
-        },
+vim.pack.add({ "https://github.com/mason-org/mason.nvim" }) 
+
+local status_ok, mason = pcall(require, "mason")
+if status_ok then
+  mason.setup({
+    ui = {
+      icons = {
+        package_installed = "✓",
+        package_pending = "➜",
+        package_uninstalled = "✗",
       },
     },
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        event = "VeryLazy",
-        cmd = "Mason",
-        opts = {
-          ui = {
-            icons = {
-              package_installed = "✓",
-              package_pending = "➜",
-              package_uninstalled = "✗",
-            },
-          },
-        },
-      },
-      "neovim/nvim-lspconfig",
-    },
-  },
-}
+  })
+end

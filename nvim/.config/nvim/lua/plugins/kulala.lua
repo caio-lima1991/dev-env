@@ -1,28 +1,32 @@
-return {
-  "mistweaverco/kulala.nvim",
+vim.pack.add({ "https://github.com/mistweaverco/kulala.nvim" })
 
-  ft = "http",
-  keys = {
-    { "<leader>R",  "",                                                  desc = "+Rest" },
-    { "<leader>Rb", "<cmd>lua require('kulala').scratchpad()<cr>",       desc = "Open scratchpad" },
-    { "<leader>Rc", "<cmd>lua require('kulala').copy()<cr>",             desc = "Copy as cURL",    ft = "http" },
-    { "<leader>RC", "<cmd>lua require('kulala').from_curl()<cr>",        desc = "Paste from curl", ft = "http" },
-    { "<leader>Re", "<cmd>lua require('kulala').set_selected_env()<cr>", desc = "Set environment", ft = "http" },
-    {
-      "<leader>Rg",
-      "<cmd>lua require('kulala').download_graphql_schema()<cr>",
-      desc = "Download GraphQL schema",
-      ft = "http",
-    },
-    { "<leader>Ri", "<cmd>lua require('kulala').inspect()<cr>",     desc = "Inspect current request",  ft = "http" },
-    { "<leader>Rn", "<cmd>lua require('kulala').jump_next()<cr>",   desc = "Jump to next request",     ft = "http" },
-    { "<leader>Rp", "<cmd>lua require('kulala').jump_prev()<cr>",   desc = "Jump to previous request", ft = "http" },
-    { "<leader>Rq", "<cmd>lua require('kulala').close()<cr>",       desc = "Close window",             ft = "http" },
-    { "<leader>Rr", "<cmd>lua require('kulala').replay()<cr>",      desc = "Replay the last request" },
-    { "<leader>Rs", "<cmd>lua require('kulala').run()<cr>",         desc = "Send the request",         ft = "http" },
-    { "<leader>RS", "<cmd>lua require('kulala').show_stats()<cr>",  desc = "Show stats",               ft = "http" },
-    { "<leader>Rt", "<cmd>lua require('kulala').toggle_view()<cr>", desc = "Toggle headers/body",      ft = "http" },
-  },
-  opts = {},
+require("kulala").setup({})
 
-}
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "http",
+    callback = function(ev)
+        local function map(lhs, rhs, desc)
+            vim.keymap.set("n", lhs, rhs, { buffer = ev.buf, desc = "Rest: " .. desc })
+        end
+
+
+        -- Keymaps only available in .http files
+        map("<leader>Rb", "<cmd>lua require('kulala').scratchpad()<cr>", "Open scratchpad")
+        map("<leader>Rc", "<cmd>lua require('kulala').copy()<cr>", "Copy as cURL")
+        map("<leader>RC", "<cmd>lua require('kulala').from_curl()<cr>", "Paste from curl")
+
+        map("<leader>Re", "<cmd>lua require('kulala').set_selected_env()<cr>", "Set environment")
+        map("<leader>Rg", "<cmd>lua require('luasnip').download_graphql_schema()<cr>", "Download GraphQL schema")
+        map("<leader>Ri", "<cmd>lua require('kulala').inspect()<cr>", "Inspect current request")
+        map("<leader>Rn", "<cmd>lua require('kulala').jump_next()<cr>", "Jump to next request")
+        map("<leader>Rp", "<cmd>lua require('kulala').jump_prev()<cr>", "Jump to previous request")
+
+        map("<leader>Rq", "<cmd>lua require('kulala').close()<cr>", "Close window")
+        map("<leader>Rr", "<cmd>lua require('kulala').replay()<cr>", "Replay last request")
+        map("<leader>Rs", "<cmd>lua require('kulala').run()<cr>", "Send the request")
+        map("<leader>RS", "<cmd>lua require('kulala').show_stats()<cr>", "Show stats")
+        map("<leader>Rt", "<cmd>lua require('kulala').toggle_view()<cr>", "Toggle headers/body")
+    end,
+})
+
+vim.keymap.set("n", "<leader>R", "", { desc = "+Rest" })
