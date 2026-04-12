@@ -1,6 +1,6 @@
 local function command_factory(client, bufnr, cmd)
-    client.request('workspace/executeCommand', {
-        command = 'jump',
+    client.request("workspace/executeCommand", {
+        command = "jump",
         arguments = { cmd },
     }, function(err, result)
         if err then
@@ -9,25 +9,23 @@ local function command_factory(client, bufnr, cmd)
     end, bufnr)
 end
 
----@type vim.lsp.Config
-
 return {
-    root_markers = { '.git', '.obsidian', '.moxide.toml' },
-    filetypes = { 'markdown' },
-    cmd = { 'markdown-oxide' },
+    root_markers = { ".git", ".obsidian", ".moxide.toml" },
+    filetypes = { "markdown" },
+    cmd = { "markdown-oxide" },
     capabilities = (function()
         local caps = vim.lsp.protocol.make_client_capabilities()
         caps.textDocument.completion.completionItem.snippetSupport = true
         return caps
     end)(),
     on_attach = function(client, bufnr)
-        for _, cmd in ipairs({ 'today', 'tomorrow', 'yesterday' }) do
-            local cmd_name = 'Lsp' .. cmd:gsub('^%l', string.upper)
+        for _, cmd in ipairs({ "today", "tomorrow", "yesterday" }) do
+            local cmd_name = "Lsp" .. cmd:gsub("^%l", string.upper)
             vim.api.nvim_buf_create_user_command(bufnr, cmd_name, function()
                 command_factory(client, bufnr, cmd)
             end, {
 
-                desc = ('Open %s daily note'):format(cmd),
+                desc = ("Open %s daily note"):format(cmd),
             })
         end
 

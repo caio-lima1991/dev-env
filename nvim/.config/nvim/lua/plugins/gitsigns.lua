@@ -1,60 +1,83 @@
-vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" })
+local git_group = vim.api.nvim_create_augroup("LazyGit", { clear = true })
 
-require("gitsigns").setup({
-    signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+    group = git_group,
+    callback = function()
+        local is_git = vim.fn.isdirectory(".git") == 1
+            or os.execute("git rev-parse --is-inside-work-tree > /dev/null 2>&1") == 0
 
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
+        if is_git then
+            vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" })
 
-    },
-    signs_staged = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-    },
-    on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
+            require("gitsigns").setup({
+                signs = {
+                    add = { text = "▎" },
+                    change = { text = "▎" },
 
-        local function map(mode, l, r, desc)
-            vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc, silent = true })
+                    delete = { text = "" },
+                    topdelete = { text = "" },
+                    changedelete = { text = "▎" },
+                    untracked = { text = "▎" },
+                },
+                signs_staged = {
+                    add = { text = "▎" },
+                    change = { text = "▎" },
+                    delete = { text = "" },
+                    topdelete = { text = "" },
+                    changedelete = { text = "▎" },
+                },
+                on_attach = function(bufnr)
+                    local gs = package.loaded.gitsigns
+
+                    local function map(mode, l, r, desc)
+                        vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc, silent = true })
+                    end
+
+                    map("n", "]h", function()
+                        if vim.wo.diff then
+                            vim.cmd.normal({ "]c", bang = true })
+                        else
+                            gs.nav_hunk("next")
+                        end
+                    end, "Next Hunk")
+
+                    map("n", "[h", function()
+                        if vim.wo.diff then
+                            vim.cmd.normal({ "[c", bang = true })
+                        else
+                            gs.nav_hunk("prev")
+                        end
+                    end, "Prev Hunk")
+
+                    map("n", "]H", function()
+                        gs.nav_hunk("last")
+                    end, "Last Hunk")
+                    map("n", "[H", function()
+                        gs.nav_hunk("first")
+                    end, "First Hunk")
+
+                    map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+
+                    map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
+                    map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+                    map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
+                    map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
+                    map("n", "<leader>ghb", function()
+                        gs.blame_line({ full = true })
+                    end, "Blame Line")
+                    map("n", "<leader>ghB", function()
+                        gs.blame()
+                    end, "Blame Buffer")
+                    map("n", "<leader>ghd", gs.diffthis, "Diff This")
+                    map("n", "<leader>ghD", function()
+                        gs.diffthis("~")
+                    end, "Diff This ~")
+
+                    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+                end,
+            })
+
+            vim.api.nvim_del_augroup_by_id(git_group)
         end
-
-        map("n", "]h", function()
-            if vim.wo.diff then
-                vim.cmd.normal({ "]c", bang = true })
-            else
-                gs.nav_hunk("next")
-            end
-        end, "Next Hunk")
-
-        map("n", "[h", function()
-            if vim.wo.diff then
-                vim.cmd.normal({ "[c", bang = true })
-            else
-                gs.nav_hunk("prev")
-            end
-        end, "Prev Hunk")
-
-        map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
-        map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
-
-        map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-
-        map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
-        map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-        map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
-        map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
-        map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
-        map("n", "<leader>ghB", function() gs.blame() end, "Blame Buffer")
-        map("n", "<leader>ghd", gs.diffthis, "Diff This")
-        map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
-
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
     end,
 })

@@ -96,19 +96,3 @@ GET_JDTLS_CONFIG = function()
 
     return config
 end
--- return {
---     {
---         "mfussenegger/nvim-jdtls",
---     },
---
---     {
---         "mfussenegger/nvim-dap",
---         ft = "java",
---
---         dependencies = {
---             { "mason-org/mason.nvim" },
---         },
---
---         opts = function()
---     },
--- }

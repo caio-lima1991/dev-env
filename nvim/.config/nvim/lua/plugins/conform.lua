@@ -21,7 +21,7 @@ conform.setup({
         java = { "google-java-format" },
         xml = { "xmlformatter" },
         markdown = { "markdownlint-cli2" },
-        sql = { "sqlfluff" }
+        sql = { "sqlfluff" },
     },
     format_on_save = {
         lsp_fallback = true,
