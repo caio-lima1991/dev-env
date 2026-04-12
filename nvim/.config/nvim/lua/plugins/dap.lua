@@ -4,20 +4,15 @@ vim.pack.add({
 	"https://github.com/nvim-neotest/nvim-nio",
 })
 
+local dap_loaded = false
 local dap_group = vim.api.nvim_create_augroup("LazyDap", { clear = true })
 
-vim.api.nvim_create_user_command("DapInit", function()
-	CONFIG_DAP()
-end, { desc = "Start dap without lsp attached" })
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = dap_group,
-	callback = function(args)
-		CONFIG_DAP()
-	end,
-})
-
 function CONFIG_DAP()
+	if dap_loaded then
+		print("DAP already loaded")
+		return
+	end
+
 	local dap = require("dap")
 	local dapui = require("dapui")
 
@@ -35,11 +30,11 @@ function CONFIG_DAP()
 			},
 			{
 				elements = {
-					{ id = "repl", size = 0.5 },
-					{ id = "console", size = 0.5 },
+					{ id = "repl", size = 0.35 },
+					{ id = "console", size = 0.65 },
 				},
 				position = "bottom",
-				size = 20,
+				size = 30,
 			},
 		},
 	})
@@ -57,85 +52,32 @@ function CONFIG_DAP()
 	end
 
 	local map = vim.keymap.set
+	map("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+	map("n", "<leader>dc", dap.continue, { desc = "Run/Continue" })
+	map("n", "<leader>di", dap.step_into, { desc = "Step Into" })
+	map("n", "<leader>do", dap.step_out, { desc = "Step Out" })
+	map("n", "<leader>dO", dap.step_over, { desc = "Step Over" })
+	map("n", "<leader>dt", dap.terminate, { desc = "Terminate" })
+	map("n", "<leader>du", dapui.toggle, { desc = "Dap UI" })
 
-	map("n", "<leader>dB", function()
-		dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-	end, { desc = "Breakpoint Condition" })
-	map("n", "<leader>db", function()
-		dap.toggle_breakpoint()
-	end, { desc = "Toggle Breakpoint" })
-	map("n", "<leader>dc", function()
-		dap.continue()
-	end, { desc = "Run/Continue" })
-	map("n", "<leader>da", function()
-		dap.continue()
-	end, { desc = "Run Application" })
-	map("n", "<leader>dC", function()
-		dap.run_to_cursor()
-	end, { desc = "Run to Cursor" })
-	map("n", "<leader>dg", function()
-		dap.goto_()
-	end, { desc = "Go to Line (No Execute)" })
-	map("n", "<leader>di", function()
-		dap.step_into()
-	end, { desc = "Step Into" })
+	map("n", "<F5>", dap.continue, { desc = "DAP: Continue" })
+	map("n", "<F10>", dap.step_over, { desc = "DAP: Step Over" })
+	map("n", "<F11>", dap.step_into, { desc = "DAP: Step Into" })
+	map("n", "<F12>", dap.step_out, { desc = "DAP: Step Out" })
+	map("n", "<F9>", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
 
-	map("n", "<leader>dj", function()
-		dap.down()
-	end, { desc = "Down" })
-
-	map("n", "<leader>dk", function()
-		dap.up()
-	end, { desc = "Up" })
-	map("n", "<leader>dl", function()
-		dap.run_last()
-	end, { desc = "Run Last" })
-	map("n", "<leader>do", function()
-		dap.step_out()
-	end, { desc = "Step Out" })
-
-	map("n", "<leader>dO", function()
-		dap.step_over()
-	end, { desc = "Step Over" })
-	map("n", "<leader>dP", function()
-		dap.pause()
-	end, { desc = "Pause" })
-
-	map("n", "<leader>dr", function()
-		dap.repl.toggle()
-	end, { desc = "Toggle REPL" })
-	map("n", "<leader>ds", function()
-		dap.session()
-	end, { desc = "Session" })
-
-	map("n", "<leader>dt", function()
-		dap.terminate()
-	end, { desc = "Terminate" })
-	map("n", "<leader>dw", function()
-		require("dap.ui.widgets").hover()
-	end, { desc = "Widgets" })
-
-	map("n", "<leader>du", function()
-		dapui.toggle({})
-	end, { desc = "Dap UI" })
-	map({ "n", "x" }, "<leader>de", function()
-		dapui.eval()
-	end, { desc = "Eval" })
-
-	-- F-Keys (VS Code style)
-	map("n", "<F5>", function()
-		dap.continue()
-	end, { desc = "DAP: Continue" })
-	map("n", "<F10>", function()
-		dap.step_over()
-	end, { desc = "DAP: Step Over" })
-	map("n", "<F11>", function()
-		dap.step_into()
-	end, { desc = "DAP: Step Into" })
-	map("n", "<F12>", function()
-		dap.step_out()
-	end, { desc = "DAP: Step Out" })
-	map("n", "<F9>", function()
-		dap.toggle_breakpoint()
-	end, { desc = "DAP: Toggle Breakpoint" })
+	dap_loaded = true
+	print("DAP Environment Loaded")
 end
+
+vim.api.nvim_create_user_command("DebugStart", function()
+	CONFIG_DAP()
+end, { desc = "Start dap without lsp attached" })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = dap_group,
+	once = true,
+	callback = function()
+		CONFIG_DAP()
+	end,
+})
