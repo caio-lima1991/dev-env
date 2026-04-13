@@ -19,7 +19,6 @@ conform.setup({
         lua = { "stylua" },
         python = { "isort", "black" },
         java = { "google-java-format" },
-        xml = { "xmlformatter" },
         markdown = { "markdownlint-cli2" },
         sql = { "sqlfluff" },
     },
