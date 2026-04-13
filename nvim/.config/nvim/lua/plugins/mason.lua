@@ -39,6 +39,10 @@ local function ensure_installed()
 	end)
 end
 
+vim.api.nvim_create_user_command("LspInstall", function()
+	ensure_installed()
+end, { desc = "Install lsp dependencies" })
+
 if status_ok then
 	mason.setup({
 		ui = {
@@ -49,5 +53,4 @@ if status_ok then
 			},
 		},
 	})
-	ensure_installed()
 end
