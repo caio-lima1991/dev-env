@@ -26,6 +26,13 @@ dap.configurations.java = {
         hostName = "127.0.0.1",
         port = 5005,
     },
+    {
+        type = "java",
+        request = "attach",
+        name = "Debug (Attach) - Websphere",
+        hostName = "127.0.0.1",
+        port = 7777,
+    },
 }
 
 GET_JDTLS_CONFIG = function()
