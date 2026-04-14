@@ -3,9 +3,7 @@ vim.keymap.set("n", "<leader>n", function()
 end, { desc = "Open my notes" })
 
 vim.keymap.set("n", "<leader>u", function()
-    require("undotree").open({
-        command = "50vnew",
-    })
+    vim.cmd("FzfLua undotree")
 end, { desc = "Open undotree" })
 
 vim.api.nvim_create_user_command("CopyPath", function()
