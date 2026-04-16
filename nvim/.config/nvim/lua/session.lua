@@ -24,3 +24,10 @@ vim.keymap.set("n", "<leader>qr", function()
         vim.notify("No session found for: " .. session_file, vim.log.levels.WARN)
     end
 end, { desc = "Restore session for current folder" })
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+    callback = function()
+        local session_file = get_session_file()
+        vim.cmd("mksession! " .. session_file)
+    end
+})
