@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 vim.api.nvim_create_autocmd("VimLeavePre", {
 	callback = function()
-		require("dapui").toggle()
+		require("dapui").close()
 		if not session_active then
 			return
 		end
