@@ -1,4 +1,6 @@
 local opt = vim.opt
+local fn = vim.fn
+
 opt.termguicolors = true
 opt.relativenumber = true
 opt.number = true
@@ -18,11 +20,13 @@ opt.shiftwidth = 4
 opt.tabstop = 4
 opt.softtabstop = 4
 
+opt.exrc = true
+
 opt.undofile = true
-opt.undodir = vim.fn.stdpath("data") .. "/undo"
+opt.undodir = fn.stdpath("data") .. "/undo"
 opt.undolevels = 1000
 
-vim.opt.completeopt = { "menu", "popup", "menuone", "noinsert", "noselect" }
+opt.completeopt = { "menu", "popup", "menuone", "noinsert", "noselect" }
 
 local g = vim.g
 g.mapleader = " "
