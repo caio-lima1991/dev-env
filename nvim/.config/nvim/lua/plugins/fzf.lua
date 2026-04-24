@@ -2,19 +2,19 @@ vim.pack.add({ "https://github.com/ibhagwan/fzf-lua" })
 local fzf = require("fzf-lua")
 
 fzf.setup({
-  defaults = {
-    formatter = "path.filename_first",
-  },
+	defaults = {
+		formatter = "path.filename_first",
+	},
 
-  files = {
-    cwd_prompt = false,
-  },
-  lsp = {
-    code_actions = {
-
-      previewer = false,
-    },
-  },
+	files = {
+		cwd_prompt = false,
+	},
+	lsp = {
+		code_actions = {
+			previewer = false,
+		},
+	},
+	file_ignore_patterns = { "node_modules/", "dist/", ".git/", "target/", ".svn/" },
 })
 
 fzf.register_ui_select()
@@ -37,7 +37,9 @@ map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Find Files (Root Dir)"
 map("n", "<leader>fF", "<cmd>FzfLua files root=false<cr>", { desc = "Find Files (cwd)" })
 map("n", "<leader>fg", "<cmd>FzfLua git_files<cr>", { desc = "Find Files (git-files)" })
 map("n", "<leader>fr", "<cmd>FzfLua oldfiles<cr>", { desc = "Recent" })
-map("n", "<leader>fR", function() fzf.oldfiles({ cwd = vim.uv.cwd() }) end, { desc = "Recent (cwd)" })
+map("n", "<leader>fR", function()
+	fzf.oldfiles({ cwd = vim.uv.cwd() })
+end, { desc = "Recent (cwd)" })
 
 -- Git Group
 map("n", "<leader>gc", "<cmd>FzfLua git_commits<CR>", { desc = "Commits" })
@@ -45,7 +47,6 @@ map("n", "<leader>gd", "<cmd>FzfLua git_diff<cr>", { desc = "Git Diff (hunks)" }
 map("n", "<leader>gb", "<cmd>FzfLua git_bcommits<CR>", { desc = "Buffer Commits" })
 map("n", "<leader>gs", "<cmd>FzfLua git_status<CR>", { desc = "Status" })
 map("n", "<leader>gS", "<cmd>FzfLua git_stash<cr>", { desc = "Git Stash" })
-
 
 -- Search Group
 map("n", '<leader>s"', "<cmd>FzfLua registers<cr>", { desc = "Registers" })
@@ -78,16 +79,25 @@ map("x", "<leader>sW", "<cmd>FzfLua grep_visual root=false<cr>", { desc = "Selec
 
 -- Functional Keymaps
 map("n", "<leader>sX", function()
-  fzf.diagnostics_workspace({ severity_only = vim.diagnostic.severity.ERROR })
+	fzf.diagnostics_workspace({ severity_only = vim.diagnostic.severity.ERROR })
 end, { desc = "Search Diagnostic Errors" })
 
-map("n", "<leader>ss", function() fzf.lsp_document_symbols({}) end, { desc = "Goto Symbol" })
+map("n", "<leader>ss", function()
+	fzf.lsp_document_symbols({})
+end, { desc = "Goto Symbol" })
 
-map("n", "<leader>sS", function() fzf.lsp_live_workspace_symbols({}) end, { desc = "Goto Symbol (Workspace)" })
+map("n", "<leader>sS", function()
+	fzf.lsp_live_workspace_symbols({})
+end, { desc = "Goto Symbol (Workspace)" })
 
 -- 4. LSP Replacements (The parts you wanted from lspconfig)
 map("n", "gd", "<cmd>FzfLua lsp_definitions jump1=true ignore_current_line=true<cr>", { desc = "Goto Definition" })
 map("n", "grr", "<cmd>FzfLua lsp_references jump1=true ignore_current_line=true<cr>", { desc = "References" })
-map("n", "gri", "<cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<cr>", { desc = "Goto Implementation" })
+map(
+	"n",
+	"gri",
+	"<cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<cr>",
+	{ desc = "Goto Implementation" }
+)
 
 map("n", "gy", "<cmd>FzfLua lsp_typedefs jump1=true ignore_current_line=true<cr>", { desc = "Goto T[y]pe Definition" })
