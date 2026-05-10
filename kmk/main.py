@@ -6,10 +6,13 @@ from kmk.scanners import DiodeOrientation
 from kmk.modules.layers import Layers
 from kmk.modules.mouse_keys import MouseKeys
 from kmk.extensions.media_keys import MediaKeys
+from kmk.modules.mouse_jiggler import MouseJiggler
 
 keyboard = KMKKeyboard()
 keyboard.modules.append(Layers())
 keyboard.extensions.append(MediaKeys())
+
+keyboard.modules.append(MouseJiggler())
 
 mouse_keys = MouseKeys(
     max_speed = 20,
@@ -39,21 +42,39 @@ keyboard.coord_mapping = [
     ]
 keyboard.diode_orientation = DiodeOrientation.COL2ROW
 
+# Definições de Camadas
+BASE = 0
+SYMB = 1
+NAVI = 2
+
 keyboard.keymap = [
+    # LAYER 0: BASE
     [
-        KC.ESC,     KC.N1,      KC.N2,      KC.N3,      KC.N4,      KC.N5,      KC.N6,      KC.N7,      KC.N8,      KC.N9,      KC.N0,      KC.BSPC,
-        KC.TAB,     KC.Q,       KC.W,       KC.E,       KC.R,       KC.T,       KC.Y,       KC.U,       KC.I,       KC.O,       KC.P,       KC.DELETE,
-        KC.LCTRL,   KC.A,       KC.S,       KC.D,       KC.F,       KC.G,       KC.H,       KC.J,       KC.K,       KC.L,       KC.SCLN,    KC.QUOT,
-        KC.LSFT,    KC.Z,       KC.X,       KC.C,       KC.V,       KC.B,       KC.N,       KC.M,       KC.COMM,    KC.DOT,     KC.SLSH,    KC.RSFT,
-                                KC.LGUI,    KC.ENTER,   KC.MO(1),   KC.HOME,    KC.END,     KC.MO(1),   KC.SPACE,   KC.RALT
+        KC.ESC,     KC.N1,    KC.N2,    KC.N3,    KC.N4,    KC.N5,                      KC.N6,    KC.N7,    KC.N8,    KC.N9,    KC.N0,    KC.BSPC,
+        KC.TAB,     KC.Q,     KC.W,     KC.E,     KC.R,     KC.T,                       KC.Y,     KC.U,     KC.I,     KC.O,     KC.P,     KC.DEL,
+        KC.LALT,    KC.A,     KC.S,     KC.D,     KC.F,     KC.G,                       KC.H,     KC.J,     KC.K,     KC.L,     KC.SCLN,  KC.QUOT,
+        KC.LSFT,    KC.Z,     KC.X,     KC.C,     KC.V,     KC.B,                       KC.N,     KC.M,     KC.COMM,  KC.DOT,   KC.SLSH,  KC.RSFT,
+                              KC.LCTL,  KC.ENT,   KC.MO(1), KC.LGUI,                    KC.RGUI,  KC.MO(2), KC.SPC,   KC.RALT
     ],
+
+    # LAYER 1: SYMBOLS & NUMPAD
     [
-        KC.F12,     KC.F1,      KC.F2,      KC.F3,      KC.F4,      KC.F5,      KC.F6,      KC.F7,      KC.F8,      KC.F9,      KC.F10,     KC.F11,
-        KC.TAB,     KC.NO,      KC.MB_LMB,  KC.MS_UP,   KC.MB_RMB,  KC.PGDOWN,  KC.GRAVE,   KC.MINS,    KC.EQL,     KC.LBRC,    KC.RBRC,    KC.BSLS,
-        KC.LCTRL,   KC.NO,      KC.MS_LT,   KC.MS_DOWN, KC.MS_RT,   KC.PGUP,    KC.LEFT,    KC.DOWN,    KC.UP,      KC.RIGHT,   KC.NO,      KC.NO,
-        KC.LSFT,    KC.CAPS,    KC.NO,      KC.NO,      KC.NO,      KC.NO,      KC.VOLD,    KC.VOLU,    KC.MUTE,    KC.NO,      KC.NO,      KC.RSFT,
-                                KC.NO,      KC.LCTL,    KC_MS_SPD,  KC.NO,      KC.NO,      KC.TRNS,    KC.NO,      KC.NO
-    ]]
+        KC.TRNS,    KC.EXLM,  KC.AT,    KC.HASH,  KC.DLR,   KC.PERC,                    KC.CIRC,  KC.AMPR,  KC.ASTR,  KC.LPRN,  KC.RPRN,  KC.TRNS,
+        KC.TRNS,    KC.NO,    KC.NO,    KC.LBRC,  KC.RBRC,  KC.PIPE,                    KC.PLUS,  KC.N7,    KC.N8,    KC.N9,    KC.ASTR,  KC.TRNS,
+        KC.TRNS,    KC.NO,    KC.GRAVE, KC.LCBR,  KC.RCBR,  KC.BSLS,                    KC.MINS,  KC.N4,    KC.N5,    KC.N6,    KC.SLASH, KC.TRNS,
+        KC.TRNS,    KC.NO,    KC.NO,    KC.LPRN,  KC.RPRN,  KC.EQL,                     KC.UNDS,  KC.N1,    KC.N2,    KC.N3,    KC.ENT,   KC.TRNS,
+                              KC.TRNS,  KC.TRNS,  KC.LGUI,  KC.NO,                      KC.TRNS,  KC.TRNS,  KC.N0,    KC.TRNS
+    ],
+
+    # LAYER 2: NAVI, MOUSE & MEDIA
+    [
+        KC.F12,     KC.F1,    KC.F2,    KC.F3,    KC.F4,    KC.F5,                      KC.F6,    KC.F7,    KC.F8,    KC.F9,    KC.F10,   KC.F11,
+        KC.MW_UP,   KC_MS_SPD,KC.MB_LMB,KC.MS_UP, KC.MB_RMB,KC.PGUP,                    KC.NO,    KC.HOME,  KC.UP,    KC.END,   KC.INS,   KC.TRNS,
+        KC.MW_DN,   KC.NO,    KC.MS_LT, KC.MS_DN, KC.MS_RT, KC.PGDN,                    KC.NO,    KC.LEFT,  KC.DOWN,  KC.RGHT,  KC.CAPS,  KC.TRNS,
+        KC.TRNS,    KC.MUTE,  KC.VOLD,  KC.VOLU,  KC.MPLY,  KC.MNXT,                    KC.MUTE,  KC.VOLD,  KC.VOLU,  KC.MPLY,  KC.MNXT,  KC.TRNS,
+                              KC.LCTL,  KC.ENT,   KC.TRNS,  KC.TRNS,                    KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS
+    ]
+]
 
 if __name__ == '__main__':
     keyboard.go()
