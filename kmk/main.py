@@ -69,8 +69,8 @@ keyboard.keymap = [
     # LAYER 2: NAVI, MOUSE & MEDIA
     [
         KC.F12,     KC.F1,    KC.F2,    KC.F3,    KC.F4,    KC.F5,                      KC.F6,    KC.F7,    KC.F8,    KC.F9,    KC.F10,   KC.F11,
-        KC.MW_UP,   KC_MS_SPD,KC.MB_LMB,KC.MS_UP, KC.MB_RMB,KC.PGUP,                    KC.NO,    KC.HOME,  KC.UP,    KC.END,   KC.INS,   KC.TRNS,
-        KC.MW_DN,   KC.NO,    KC.MS_LT, KC.MS_DN, KC.MS_RT, KC.PGDN,                    KC.NO,    KC.LEFT,  KC.DOWN,  KC.RGHT,  KC.CAPS,  KC.TRNS,
+        KC.TRNS,    KC_MS_SPD,KC.MB_LMB,KC.MS_UP, KC.MB_RMB,KC.PGUP,                    KC.NO,    KC.HOME,  KC.UP,    KC.END,   KC.INS,   KC.TRNS,
+        KC.TRNS,    KC.NO,    KC.MS_LT, KC.MS_DN, KC.MS_RT, KC.PGDN,                    KC.NO,    KC.LEFT,  KC.DOWN,  KC.RGHT,  KC.CAPS,  KC.TRNS,
         KC.TRNS,    KC.MUTE,  KC.VOLD,  KC.VOLU,  KC.MPLY,  KC.MNXT,                    KC.MUTE,  KC.VOLD,  KC.VOLU,  KC.MPLY,  KC.MNXT,  KC.TRNS,
                               KC.LCTL,  KC.ENT,   KC.TRNS,  KC.TRNS,                    KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS
     ]
