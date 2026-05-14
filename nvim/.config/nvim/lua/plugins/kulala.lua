@@ -2,16 +2,12 @@ vim.pack.add({ "https://github.com/mistweaverco/kulala.nvim" })
 
 require("kulala").setup({
 	global_keymaps = false,
-	ft = { "http", "rest" },
-	opts = {
-		global_keymaps = false,
-		global_keymaps_prefix = "<leader>R",
-		kulala_keymaps_prefix = "",
-	},
+	global_keymaps_prefix = "<leader>R",
+	kulala_keymaps_prefix = "",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "http",
+	pattern = { "http", "rest" },
 	callback = function(ev)
 		local function map(lhs, rhs, desc)
 			vim.keymap.set("n", lhs, rhs, { buffer = ev.buf, desc = "Rest: " .. desc })
@@ -19,7 +15,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		vim.keymap.set("n", "<leader>R", "", { desc = "+Rest" })
 
-		-- Keymaps only available in .http files
 		map("<leader>Rc", "<cmd>lua require('kulala').copy()<cr>", "Copy as cURL")
 		map("<leader>RC", "<cmd>lua require('kulala').from_curl()<cr>", "Paste from curl")
 

@@ -22,6 +22,7 @@ local function ensure_installed()
 		"stylua",
 		"ts-standard",
 		"typescript-language-server",
+		"kulala-fmt",
 	}
 
 	registry.refresh(function()
