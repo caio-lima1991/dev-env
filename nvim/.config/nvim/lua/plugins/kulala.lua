@@ -1,10 +1,20 @@
 vim.pack.add({ "https://github.com/mistweaverco/kulala.nvim" })
 
-require("kulala").setup({
-	global_keymaps = false,
-	global_keymaps_prefix = "<leader>R",
-	kulala_keymaps_prefix = "",
-})
+local grammar_dir = vim.fn.stdpath("data") .. "/site/pack/core/opt/kulala.nvim/lua/tree-sitter"
+local parser_dst  = grammar_dir .. "/parser/kulala_http.so"
+
+if not vim.uv.fs_stat(parser_dst) then
+	vim.fn.mkdir(grammar_dir .. "/parser", "p")
+	vim.system({ "tree-sitter", "build", "-o", parser_dst }, { cwd = grammar_dir }, function(r)
+		vim.schedule(function()
+			if r.code == 0 then
+				vim.notify("kulala_http: parser built")
+			else
+				vim.notify("kulala_http: build failed\n" .. r.stderr, vim.log.levels.ERROR)
+			end
+		end)
+	end)
+end
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "http", "rest" },
