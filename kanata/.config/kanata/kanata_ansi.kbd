@@ -1,0 +1,35 @@
+(defcfg
+  process-unmapped-keys yes
+  windows-altgr add-lctl-release
+)
+
+;; Declaramos apenas as teclas que vão participar da lógica
+(defsrc
+  caps ret p l ; ' i o a
+)
+
+(defalias
+  cap_l1 (tap-hold-release 200 200 caps (layer-while-held layer1))
+  ent_l2 (tap-hold-release 200 200 ret (layer-while-held layer1))
+)
+
+(deflayermap (base)
+  caps @cap_l1
+  ret  @ent_l2
+)
+
+(deflayermap (layer1)
+  p up
+  l left
+  ; down
+  ' rght
+  i home
+  o end
+  q `
+  a S-`
+  w pgup
+  s pgdn
+  e mute
+  c vold
+  d volu
+)

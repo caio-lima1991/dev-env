@@ -1,0 +1,36 @@
+(defcfg
+  process-unmapped-keys yes
+  windows-altgr add-lctl-release
+)
+
+(defsrc
+  caps ret [ ; ' \ p l a ro
+)
+
+(defalias
+  cap_l1 (tap-hold-release 200 200 caps (layer-while-held layer1))
+  ent_l1 (tap-hold-release 200 200 ret (layer-while-held layer1))
+)
+
+(deflayermap (base)
+  caps @cap_l1
+  ret  @ent_l1
+  ro   rsft
+)
+
+(deflayermap (layer1)
+  [ up
+  ; left
+  ' down
+  \ rght
+  p home
+  l end
+  _ bspc
+  q grv
+  a S-grv
+  w pgup
+  s pgdn
+  e mute
+  c vold
+  d volu
+)
