@@ -8,4 +8,5 @@ require("obsidian").setup({
             path = "~/myvault/",
         },
     },
+    ui = { enable = false },
 })
