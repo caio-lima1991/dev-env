@@ -5,7 +5,6 @@ vim.lsp.enable({
     "cssls",
     "html",
     "lua_ls",
-    "markdown_oxide",
     "pyright",
     "ts_ls",
     "angularls",

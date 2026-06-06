@@ -14,6 +14,7 @@ opt.swapfile = false
 opt.splitright = true
 opt.splitbelow = true
 opt.foldenable = false
+opt.conceallevel = 1
 
 opt.expandtab = true
 opt.shiftwidth = 4
