@@ -1,12 +1,19 @@
 vim.pack.add({ "https://github.com/obsidian-nvim/obsidian.nvim" })
 
 require("obsidian").setup({
-    legacy_commands = false,
-    workspaces = {
-        {
-            name = "personal",
-            path = "~/myvault/",
-        },
-    },
-    ui = { enable = false },
+	legacy_commands = false,
+	workspaces = {
+		{
+			name = "personal",
+			path = "~/myvault/",
+		},
+	},
+	unique_note = {
+		enabled = true,
+		format = "YYYYMMDDHHmmss",
+		folder = nil,
+		template = nil,
+	},
+
+	ui = { enable = false },
 })
