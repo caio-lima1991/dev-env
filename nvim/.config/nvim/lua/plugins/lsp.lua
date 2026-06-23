@@ -8,5 +8,6 @@ vim.lsp.enable({
     "pyright",
     "ts_ls",
     "angularls",
-    "lemminx"
+    "lemminx",
+    "marksman"
 })

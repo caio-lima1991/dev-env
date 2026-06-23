@@ -1,33 +1,44 @@
 local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
+local i = ls.insert_node
 local f = ls.function_node
 
 local snippets = {
 
+    s("note", {
+        t({ "---", "" }),
+        t('id: "'),
+        f(function() return vim.fn.expand("%:t:r") end, {}),
+        t({ '"', "aliases:", "  - " }),
+        i(1, "Title"),
+        t({ "", "tags:", "  - " }),
+        i(2, "#tag"),
+        t({ "", "---", "", "" }),
+    }),
+
+
     s("litnote", {
-        t({ "# ", "" }),
-
-        t({ "", "---", "title: " }),
-        t({ "", "author: " }),
-        t({ "", "source: " }),
-        t({ "", "tags: #type/literature " }),
-        t({ "", "", "" }),
-
-        t("# Summary"),
-        t({ "", "", "# Key Points" }),
-        t({ "", "", "# Connections", "" }),
+        t({ "---", "" }),
+        t("id: "),
+        f(function() return vim.fn.expand("%:t:r") end, {}),
+        t({ "", "aliases:", "  - " }),
+        i(1, "Title"),
+        t({ "", "tags: []", "---", "", "" }),
+        t({ "# Summary", "", "" }),
+        t({ "# Key Points", "", "" }),
+        t({ "# Connections", "" }),
     }),
 
     s("fnote", {
-        t({ "# ", "" }),
-
-        t({ "", "tags: " }),
-        t({ "", "", "" }),
-
-        t("# Raw Thought"),
-
-        t({ "", "", "# Source/Context", "" }),
+        t({ "---", "" }),
+        t("id: "),
+        f(function() return vim.fn.expand("%:t:r") end, {}),
+        t({ "", "aliases:", "  - " }),
+        i(1, "Title"),
+        t({ "", "tags: []", "---", "", "" }),
+        t({ "# Raw Thought", "", "" }),
+        t({ "# Source/Context", "" }),
     }),
 }
 

@@ -14,7 +14,7 @@ fzf.setup({
 			previewer = false,
 		},
 	},
-	file_ignore_patterns = { "node_modules/", "dist/", ".git/", "target/", ".svn/" },
+	file_ignore_patterns = { "node_modules/", "dist/", ".git/", "target/", ".svn/", "%.ignore" },
 })
 
 fzf.register_ui_select()
