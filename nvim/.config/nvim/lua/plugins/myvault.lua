@@ -1,5 +1,5 @@
 local fzf = require("fzf-lua")
-local vault = "~/myvault/"
+local vault = "~/.nb/home/"
 
 local map = vim.keymap.set
 
