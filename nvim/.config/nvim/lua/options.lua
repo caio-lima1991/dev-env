@@ -14,6 +14,7 @@ opt.splitright = true
 opt.splitbelow = true
 opt.foldenable = false
 opt.conceallevel = 1
+opt.fillchars = { eob = " " }
 
 opt.expandtab = true
 opt.shiftwidth = 4
