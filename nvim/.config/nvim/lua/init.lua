@@ -1,3 +1,8 @@
+require("core.options")
+require("core.keymaps")
+require("core.session")
+require("core.clipboard")
+
 local function load_dir(dir_name)
 	local path = vim.fn.stdpath("config") .. "/lua/" .. dir_name
 	local files = vim.fn.split(vim.fn.glob(path .. "/*.lua"), "\n")
@@ -12,5 +17,4 @@ local function load_dir(dir_name)
 	end
 end
 
-load_dir("core")
 load_dir("plugins")

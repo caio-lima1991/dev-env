@@ -31,7 +31,6 @@ opt.completeopt = { "menu", "popup", "menuone", "noinsert", "noselect" }
 
 local g = vim.g
 g.mapleader = " "
-g.clipboard = "osc52"
 
 local o = vim.o
 o.winborder = "rounded"
