@@ -36,3 +36,4 @@ g.clipboard = "osc52"
 local o = vim.o
 o.winborder = "rounded"
 o.confirm = true
+o.statusline = " %f %m%=%{&fileencoding} | %{&fileformat} | %l:%c "

@@ -32,14 +32,6 @@
       "rev": "b03fb0f20bc1d43daf558cda981a2be22e73ac42",
       "src": "https://github.com/mason-org/mason.nvim"
     },
-    "mini.icons": {
-      "rev": "7fdae2443a0e2910015ca39ad74b50524ee682d3",
-      "src": "https://github.com/nvim-mini/mini.icons"
-    },
-    "mini.statusline": {
-      "rev": "b456bfe845e475e9cec065b7a9a1ef657ad2f41b",
-      "src": "https://github.com/nvim-mini/mini.statusline"
-    },
     "nvim-dap": {
       "rev": "45a69eba683a2c448dd9ecfc4de89511f0646b5f",
       "src": "https://github.com/mfussenegger/nvim-dap"

@@ -1,7 +1,6 @@
-vim.pack.add({
-	"https://github.com/nvim-mini/mini.icons",
-	"https://github.com/MeanderingProgrammer/render-markdown.nvim",
-})
+vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" })
+
 require("render-markdown").setup({
 	completions = { lsp = { enabled = true } },
+	icon_provider = "none",
 })
