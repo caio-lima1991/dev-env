@@ -1,7 +1,7 @@
 vim.pack.add({ "https://github.com/mistweaverco/kulala.nvim" })
 
 local grammar_dir = vim.fn.stdpath("data") .. "/site/pack/core/opt/kulala.nvim/lua/tree-sitter"
-local parser_dst  = grammar_dir .. "/parser/kulala_http.so"
+local parser_dst = grammar_dir .. "/parser/kulala_http.so"
 
 if not vim.uv.fs_stat(parser_dst) then
 	vim.fn.mkdir(grammar_dir .. "/parser", "p")
@@ -16,9 +16,17 @@ if not vim.uv.fs_stat(parser_dst) then
 	end)
 end
 
+require("kulala").setup()
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "http", "rest" },
 	callback = function(ev)
+		vim.lsp.start({
+			name = "kulala-ls",
+			cmd = { "kulala-ls", "--stdio" },
+			root_dir = vim.fs.root(ev.buf, { ".git", "http-client.env.json" }) or vim.fn.getcwd(),
+		})
+
 		local function map(lhs, rhs, desc)
 			vim.keymap.set("n", lhs, rhs, { buffer = ev.buf, desc = "Rest: " .. desc })
 		end
