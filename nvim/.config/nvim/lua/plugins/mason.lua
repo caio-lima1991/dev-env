@@ -5,7 +5,9 @@ local status_ok, mason = pcall(require, "mason")
 local function ensure_installed()
 	local registry = require("mason-registry")
 	local packages = {
-		"sqlfluff",
+		"sql-formatter",
+		"black",
+		"isort",
 		"google-java-format",
 		"prettier",
 		"xmlformatter",
