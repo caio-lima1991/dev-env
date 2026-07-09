@@ -1,12 +1,16 @@
+[general]
+import = ["~/.config/alacritty/themes/noctalia.toml"]
+
 [env]
 TERM = "xterm-256color"
 COLORTERM = "truecolor"
 
 [window]
-decorations = "None"
+decorations = "Full"
 startup_mode = "Maximized"
 
 [font]
+normal.family = "CodeNewRoman Nerd Font"
 size = 11
 
 [terminal]
