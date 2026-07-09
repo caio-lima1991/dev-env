@@ -1,5 +1,4 @@
 ### Variables
-workspace_layout tabbed
 
 exec noctalia
 set $ipc noctalia msg
