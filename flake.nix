@@ -1,31 +1,26 @@
 {
-  description = "Main apps";
+  description = "Pacotes padrão de desenvolvimento";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
   outputs = { self, nixpkgs }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     packages.${system}.default = pkgs.buildEnv {
-      name = "desktop";
+      name = "profile";
       paths = with pkgs; [
         neovim
-        git
+        nodejs_24
+        pnpm
+        tree-sitter
         tmux
-        htop
         ripgrep
         fzf
-        yazi
-        _7zz
-        jq
-        poppler
         fd
-        zoxide
-        resvg
-        imagemagick
-        ffmpeg
-    	nb
+        nb
+        stow
+        w3m
       ];
     };
   };

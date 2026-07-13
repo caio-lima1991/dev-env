@@ -25,13 +25,19 @@ conform.setup({
 		http = { "kulala-fmt" },
 		rest = { "kulala-fmt" },
 	},
-	format_on_save = {
-		lsp_fallback = true,
-		async = false,
-		timeout_ms = 3000,
-	},
+	format_on_save = function()
+		if vim.g.autoformat_disabled then
+			return
+		end
+		return { lsp_fallback = true, async = false, timeout_ms = 3000 }
+	end,
 	formatters = { ["google-java-format"] = { prepend_args = { "--aosp" } } },
 })
+
+vim.keymap.set("n", "<leader>cF", function()
+	vim.g.autoformat_disabled = not vim.g.autoformat_disabled
+	vim.notify("Auto format " .. (vim.g.autoformat_disabled and "off" or "on"))
+end, { desc = "Toggle auto format" })
 
 vim.keymap.set({ "n", "v" }, "<leader>cf", function()
 	conform.format({
