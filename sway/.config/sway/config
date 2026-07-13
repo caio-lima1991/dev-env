@@ -10,7 +10,7 @@ set $down j
 set $up k
 set $right l
 
-set $term alacritty
+set $term foot
 
 gaps inner 6
 gaps outer 3
@@ -179,13 +179,6 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="dialog"] floating enable
 for_window [window_type="dialog"] floating enable
-
-# Adwaita dark window colors
-client.focused          #3d3d3d #2e2e2e #ffffff #78aeed #2e2e2e
-client.focused_inactive #2e2e2e #1e1e1e #cccccc #444444 #1e1e1e
-client.unfocused        #1e1e1e #1a1a1a #999999 #444444 #1a1a1a
-client.urgent           #e74c3c #e74c3c #ffffff #e74c3c #e74c3c
-client.placeholder      #000000 #0c0c0c #ffffff #000000 #0c0c0c
 
 include /etc/sway/config.d/*
 
