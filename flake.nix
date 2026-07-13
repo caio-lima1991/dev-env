@@ -1,7 +1,7 @@
 {
   description = "Pacotes padrão de desenvolvimento";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
 
   outputs = { self, nixpkgs }: let
     system = "x86_64-linux";
@@ -11,7 +11,7 @@
       name = "profile";
       paths = with pkgs; [
         neovim
-        nodejs_24
+        nodejs_26
         pnpm
         tree-sitter
         tmux
