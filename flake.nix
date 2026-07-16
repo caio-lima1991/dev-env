@@ -21,6 +21,8 @@
         nb
         stow
         w3m
+        gcc
+        jdk25
       ];
     };
   };

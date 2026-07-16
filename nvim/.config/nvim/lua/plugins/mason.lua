@@ -1,7 +1,5 @@
 vim.pack.add({ "https://github.com/mason-org/mason.nvim" })
 
-local status_ok, mason = pcall(require, "mason")
-
 local function ensure_installed()
 	local registry = require("mason-registry")
 	local packages = {
@@ -21,9 +19,7 @@ local function ensure_installed()
 		"markdownlint-cli2",
 		"pyright",
 		"stylua",
-		"ts-standard",
 		"typescript-language-server",
-		"kulala-fmt",
 		"marksman",
 	}
 
@@ -42,12 +38,8 @@ local function ensure_installed()
 	end)
 end
 
-vim.api.nvim_create_user_command("LspInstall", function()
-	ensure_installed()
-end, { desc = "Install lsp dependencies" })
-
-if status_ok then
-	mason.setup({
+local function setup_mason()
+	require("mason").setup({
 		ui = {
 			icons = {
 				package_installed = "✓",
@@ -57,3 +49,13 @@ if status_ok then
 		},
 	})
 end
+
+vim.api.nvim_create_user_command("Mason", function()
+	setup_mason()
+	vim.cmd("Mason")
+end, { desc = "Abrir Mason UI" })
+
+vim.api.nvim_create_user_command("LspInstall", function()
+	setup_mason()
+	ensure_installed()
+end, { desc = "Instalar dependências LSP" })
