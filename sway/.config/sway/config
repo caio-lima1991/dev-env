@@ -156,7 +156,7 @@ bindsym --locked XF86MonBrightnessUp exec $ipc brightness-up
 bindsym --locked XF86MonBrightnessDown exec $ipc brightness-down
 bindsym --locked XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
-bindsym Print exec flameshot gui
+bindsym Print exec flatpak run org.flameshot.Flameshot gui
 
 #
 # Regras de janela:
