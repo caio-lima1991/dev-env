@@ -21,19 +21,36 @@ fzf.register_ui_select()
 
 fzf.config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
 
+-- Wrapper igual ao LazyVim.pick: resolve o cwd baseado no buffer atual no momento
+-- da chamada, suportando buffers normais e oil.nvim (oil://...).
+local function pick(command, opts)
+	return function()
+		opts = vim.deepcopy(opts or {})
+		if not opts.cwd and opts.root ~= false then
+			local bufname = vim.api.nvim_buf_get_name(0)
+			local dir = bufname:match("^oil://(.+)$") -- oil.nvim
+				or (vim.uv.fs_stat(bufname) or {}).type == "directory" and bufname
+				or vim.fn.fnamemodify(bufname, ":h")
+			local git = vim.fs.find(".git", { path = dir, upward = true })[1]
+			opts.cwd = git and vim.fn.fnamemodify(git, ":h") or dir
+		end
+		fzf[command](opts)
+	end
+end
+
 local map = vim.keymap.set
 
 -- Main Picker Keymaps
 map("n", "<leader>,", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", { desc = "Switch Buffer" })
-map("n", "<leader>/", "<cmd>FzfLua live_grep formatter=path.filename_first<cr>", { desc = "Grep (Root Dir)" })
+map("n", "<leader>/", pick("live_grep", { formatter = "path.filename_first" }), { desc = "Grep (Root Dir)" })
 map("n", "<leader>:", "<cmd>FzfLua command_history<cr>", { desc = "Command History" })
-map("n", "<leader><space>", "<cmd>FzfLua files<cr>", { desc = "Find Files (Root Dir)" })
+map("n", "<leader><space>", pick("files"), { desc = "Find Files (Root Dir)" })
 
 -- Find Group
 map("n", "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", { desc = "Buffers" })
 map("n", "<leader>fB", "<cmd>FzfLua buffers<cr>", { desc = "Buffers (all)" })
 map("n", "<leader>fc", "<cmd>FzfLua files root=false cwd=~/.config/nvim<cr>", { desc = "Find Config File" })
-map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Find Files (Root Dir)" })
+map("n", "<leader>ff", pick("files"), { desc = "Find Files (Root Dir)" })
 map("n", "<leader>fF", "<cmd>FzfLua files root=false<cr>", { desc = "Find Files (cwd)" })
 map("n", "<leader>fg", "<cmd>FzfLua git_files<cr>", { desc = "Find Files (git-files)" })
 map("n", "<leader>fr", "<cmd>FzfLua oldfiles<cr>", { desc = "Recent" })
@@ -58,7 +75,7 @@ map("n", "<leader>sc", "<cmd>FzfLua command_history<cr>", { desc = "Command Hist
 map("n", "<leader>sC", "<cmd>FzfLua commands<cr>", { desc = "Commands" })
 map("n", "<leader>sd", "<cmd>FzfLua diagnostics_workspace<cr>", { desc = "Diagnostics" })
 map("n", "<leader>sD", "<cmd>FzfLua diagnostics_document<cr>", { desc = "Buffer Diagnostics" })
-map("n", "<leader>sg", "<cmd>FzfLua live_grep formatter=path.filename_first<cr>", { desc = "Grep (Root Dir)" })
+map("n", "<leader>sg", pick("live_grep", { formatter = "path.filename_first" }), { desc = "Grep (Root Dir)" })
 map("n", "<leader>sG", "<cmd>FzfLua live_grep_native root=false<cr>", { desc = "Grep (cwd)" })
 map("n", "<leader>sh", "<cmd>FzfLua help_tags<cr>", { desc = "Help Pages" })
 map("n", "<leader>sH", "<cmd>FzfLua highlights<cr>", { desc = "Search Highlight Groups" })
