@@ -7,7 +7,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 			"https://github.com/saghen/blink.cmp",
 			"https://github.com/L3MON4D3/LuaSnip",
 			"https://github.com/rafamadriz/friendly-snippets",
-			"https://github.com/kristijanhusak/vim-dadbod-completion",
 		})
 
 		require("luasnip.loaders.from_vscode").lazy_load()
@@ -23,15 +22,8 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 			},
 
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "dadbod" },
-
-				providers = {
-					dadbod = {
-						name = "Dadbod",
-						module = "vim_dadbod_completion.blink",
-						score_offset = 100,
-					},
-				},
+				default = { "lsp", "path", "snippets", "buffer" },
+				providers = {},
 			},
 
 			snippets = { preset = "luasnip" },
