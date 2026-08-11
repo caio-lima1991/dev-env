@@ -1,5 +1,5 @@
 flake.nix
-Brewfile
+
 foot
 kanata
 kmk
@@ -8,3 +8,4 @@ nvim
 sqlplus
 sway
 tmux
+flake.lock
