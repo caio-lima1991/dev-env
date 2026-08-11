@@ -1,6 +1,5 @@
 {
   description = "Pacotes padrão de desenvolvimento";
-
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
 
   outputs = { self, nixpkgs }: let
@@ -10,19 +9,28 @@
     packages.${system}.default = pkgs.buildEnv {
       name = "profile";
       paths = with pkgs; [
+        # Editores, Shell & Ferramentas de Terminal
         neovim
+        tmux
+        w3m
+        posting
+        nb
+
+        # Runtimes & Compiladores
         nodejs_26
         pnpm
-        tree-sitter
-        tmux
-        ripgrep
-        fzf
-        fd
-        nb
-        stow
-        w3m
-        gcc
         jdk25
+
+        # Busca, Navegação & Arquivos
+        ripgrep
+        fd
+        fzf
+        stow
+        gzip
+
+        # Ferramentas de Dev & Banco de Dados
+        tree-sitter
+        usql
       ];
     };
   };
