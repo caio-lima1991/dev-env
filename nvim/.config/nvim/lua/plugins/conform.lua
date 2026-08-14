@@ -21,9 +21,7 @@ conform.setup({
 		python = { "isort", "black" },
 		java = { "google-java-format" },
 		markdown = { "markdownlint-cli2" },
-		sql = { "sql_formatter" },
-		http = { "kulala-fmt" },
-		rest = { "kulala-fmt" },
+		sql = { "sqlfluff" },
 	},
 	format_on_save = function()
 		if vim.g.autoformat_disabled then
