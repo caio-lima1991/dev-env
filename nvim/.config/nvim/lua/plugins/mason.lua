@@ -23,6 +23,8 @@ local function ensure_installed()
 		"stylua",
 		"typescript-language-server",
 		"marksman",
+		"lemminx",
+		"postgres-language-server",
 	}
 
 	registry.refresh(function()
